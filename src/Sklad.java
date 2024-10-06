@@ -33,11 +33,61 @@ public class Sklad {
             System.out.println(item[0] + " " + item[1] + " " + item[2]);
         }
 
+        list = DiscardFirstLast(list, n);
+
+
+
+
+
+
+
 
 
         scanner.close();
     }
+    static ArrayList<Object[]> DiscardFirstLast(ArrayList<Object[]> list, int n) {
+
+        boolean[] bought = new boolean[n];
+        boolean[] sold = new boolean[n];
+
+        // Procházení operací v ArrayListu
+        for (int i = 0; i < list.size(); i++) {
+            // Získání aktuálního řádku z ArrayListu
+            Object[] item = list.get(i);
+            char operation = (char) item[0];  // operace ('P' nebo 'N')
+            int typ = (int) item[1];          // typ (int)
+            int price = (int) item[2];        // cena (int)
+
+            if (operation == 'N') {
+                bought[typ] = true;  // Označení, že byl typ koupen
+            }
+            if (operation == 'P' && !bought[typ]) {
+                list.remove(i);
+                i--; // Snížíme index, protože po odstranění se velikost zmenší
+            }
+        }
+
+        for (int i = list.size() - 1; i >= 0; i--) {
+            Object[] item = list.get(i);
+            char operation = (char) item[0];
+            int typ = (int) item[1];
+            int price = (int) item[2];
+
+            if (operation == 'P') {
+                sold[typ] = true;  // Označení, že byl typ prodán
+            }
+
+            if (operation == 'N' && !sold[typ]) {
+                list.remove(i);  // Odstranění posledního prodeje pro daný typ
+            }
+        }
+    return list;
+    }
+
 }
+
+
+
 
 class strings
 {
@@ -77,6 +127,6 @@ class strings
             "N 1 10\n" +
             "P 1 20\n" +
             "P 1 25\n" +
-            "P 1 2\n" +
+            "P 2 2\n" +
             "N 1 12";
 }
