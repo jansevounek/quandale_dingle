@@ -43,8 +43,39 @@ public class Sklad {
 
 
 
+
+
+
+
+
+
         scanner.close();
     }
+
+    static ArrayList<Object[]> MergeOrders(ArrayList<Object[]> list, int n) {
+        int[] lowestBuy = new int[n];
+
+        // Procházení operací v ArrayListu
+        for (int i = 0; i < list.size(); i++) {
+            // Získání aktuálního řádku z ArrayListu
+            Object[] item = list.get(i);
+            char operation = (char) item[0];  // operace ('P' nebo 'N')
+            int typ = (int) item[1];          // typ (int)
+            int price = (int) item[2];        // cena (int)
+
+
+        }
+
+
+
+
+
+
+
+        return list;
+    }
+
+
     static ArrayList<Object[]> DiscardFirstLast(ArrayList<Object[]> list, int n) {
 
         boolean[] bought = new boolean[n];
